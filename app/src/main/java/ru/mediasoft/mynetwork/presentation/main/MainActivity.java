@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView resultTextView;
     private View loader;
 
+    MyAsyncTask myAsyncTask;
 
     private TranslaterApi translaterApi;
 
@@ -117,31 +118,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void onTranslateButtonClick(View view) {
         loader.setVisibility(View.VISIBLE);
-        translaterApi.translate(YANDEX_KEY, editText.getText().toString(), "en", "plain", "")
-                .enqueue(new Callback<TranslateModel>() {
-                    @Override
-                    public void onResponse(Call<TranslateModel> call, Response<TranslateModel> response) {
-                        switch (response.code()) {
-                            case 200:
-                                resultTextView.setText(response.body().text.toString());
-                                break;
-                            default:
-                                resultTextView.setText("");
-                                try {
-                                    showErrorMessage(response.errorBody().string());
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                break;
-                        }
-                        loader.setVisibility(View.GONE);
-                    }
 
-                    @Override
-                    public void onFailure(Call<TranslateModel> call, Throwable t) {
-                        showErrorMessage(t.getMessage());
-                        loader.setVisibility(View.GONE);
-                    }
-                });
+        myAsyncTask = new MyAsyncTask(translaterApi, new MyAsyncTask.ResultTranslateTextCallBack() {
+            @Override
+            public void onResult(String translatedText) {
+                loader.setVisibility(View.GONE);
+                resultTextView.setText(translatedText);
+            }
+        });
+
+        myAsyncTask.execute(YANDEX_KEY, editText.getText().toString(), "en", "plain", "");
     }
+
 }

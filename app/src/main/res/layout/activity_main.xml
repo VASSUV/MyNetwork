@@ -7,65 +7,10 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.MainActivity">
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-                <Button
-                    android:id="@+id/buttonLoadLangs"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="onLoadLangsButtonClick"
-                    android:padding="16dp"
-                    android:text="Load Languages" />
-
-                <Button
-                    android:id="@+id/buttonDetectLang"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onDetectButtonClick"
-                    android:padding="16dp"
-                    android:text="Detect Language" />
-
-                <Button
-                    android:id="@+id/buttonTranslate"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:onClick="onTranslateButtonClick"
-                    android:padding="16dp"
-                    android:text="Translate" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/resultTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp" />
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/loader"
